@@ -1,0 +1,189 @@
+.farm-drone {
+  --drone-edge-gap: 1.5rem;
+  position: absolute;
+  z-index: 2;
+  top: 18%;
+  left: var(--drone-edge-gap);
+  width: var(--drone-width);
+  pointer-events: none;
+  animation: farm-drone-traverse 16s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.farm-drone__body {
+  position: relative;
+  animation: farm-drone-bob 3.8s ease-in-out infinite alternate;
+}
+
+.farm-drone__image {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 9px 9px rgba(9, 30, 20, 0.23));
+}
+
+.farm-drone__spray {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.farm-drone__stream {
+  position: absolute;
+  top: var(--spray-top);
+  left: var(--spray-left);
+  width: var(--spray-width);
+  height: var(--spray-height);
+  transform: translateX(-50%);
+  opacity: 0.92;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 100%);
+}
+
+.farm-drone__stream::before,
+.farm-drone__stream::after {
+  position: absolute;
+  inset: 0;
+  content: '';
+}
+
+.farm-drone__stream::before {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(235, 251, 255, 0.55), transparent 76%),
+    linear-gradient(90deg, transparent 8%, rgba(221, 248, 255, 0.22) 50%, transparent 92%);
+  clip-path: polygon(42% 0, 58% 0, 100% 100%, 0 100%);
+  animation: farm-drone-mist 1.7s ease-in-out infinite alternate;
+}
+
+.farm-drone__stream::after {
+  background-image:
+    radial-gradient(circle, rgba(248, 254, 255, 0.98) 0 1px, transparent 1.8px),
+    radial-gradient(circle, rgba(205, 239, 250, 0.94) 0 1.2px, transparent 2px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.88) 0 0.8px, transparent 1.7px);
+  background-position: 1px 0, 7px 9px, 12px 4px;
+  background-size: 13px 17px, 17px 23px, 19px 21px;
+  animation: farm-drone-droplets 680ms linear infinite;
+}
+
+.farm-drone__stream--outer-left {
+  --spray-left: 11%;
+  --spray-top: 32%;
+  --spray-width: clamp(28px, 5vw, 62px);
+  --spray-height: clamp(145px, 29vh, 360px);
+}
+
+.farm-drone__stream--inner-left {
+  --spray-left: 32%;
+  --spray-top: 39%;
+  --spray-width: clamp(24px, 4.5vw, 50px);
+  --spray-height: clamp(125px, 25vh, 310px);
+}
+
+.farm-drone__stream--center {
+  --spray-left: 50%;
+  --spray-top: 78%;
+  --spray-width: clamp(28px, 5vw, 58px);
+  --spray-height: clamp(90px, 18vh, 220px);
+}
+
+.farm-drone__stream--inner-right {
+  --spray-left: 70%;
+  --spray-top: 39%;
+  --spray-width: clamp(24px, 4.5vw, 50px);
+  --spray-height: clamp(125px, 25vh, 310px);
+}
+
+.farm-drone__stream--outer-right {
+  --spray-left: 89%;
+  --spray-top: 32%;
+  --spray-width: clamp(28px, 5vw, 62px);
+  --spray-height: clamp(145px, 29vh, 360px);
+}
+
+.farm-drone__stream--inner-left::after {
+  animation-delay: -180ms;
+}
+
+.farm-drone__stream--inner-right::after {
+  animation-delay: -360ms;
+}
+
+.farm-drone__stream--center::after {
+  animation-delay: -270ms;
+}
+
+.farm-drone__stream--outer-right::after {
+  animation-delay: -520ms;
+}
+
+@keyframes farm-drone-traverse {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(100cqw - var(--drone-width) - 3rem));
+  }
+}
+
+@keyframes farm-drone-bob {
+  from {
+    transform: translateY(-5px);
+  }
+
+  to {
+    transform: translateY(7px);
+  }
+}
+
+@keyframes farm-drone-droplets {
+  from {
+    background-position: 1px -18px, 7px -13px, 12px -16px;
+    opacity: 0.58;
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  to {
+    background-position: 1px 17px, 7px 31px, 12px 25px;
+    opacity: 0;
+  }
+}
+
+@keyframes farm-drone-mist {
+  from {
+    opacity: 0.56;
+  }
+
+  to {
+    opacity: 0.95;
+  }
+}
+
+@media (max-width: 760px) {
+  .farm-drone {
+    --drone-edge-gap: 0.75rem;
+    top: 13%;
+    animation-duration: 12s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .farm-drone,
+  .farm-drone__body,
+  .farm-drone__stream::before,
+  .farm-drone__stream::after {
+    animation: none;
+  }
+
+  .farm-drone {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

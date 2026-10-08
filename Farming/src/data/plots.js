@@ -1,0 +1,32 @@
+export const plots = [
+  {
+    id: 'north-terrace',
+    name: 'North Terrace Beds',
+    location: 'Northside • 0.4 miles away',
+    size: '12 raised beds',
+    availability: '3 beds available',
+    icon: '🌱',
+    image: '/images/plots/north-terrace.jpg',
+    description: 'Sunny raised beds with shared tools, compost, and a weekly grower meetup.',
+  },
+  {
+    id: 'riverside-greenhouse',
+    name: 'Riverside Greenhouse',
+    location: 'Riverside • 1.2 miles away',
+    size: '8 greenhouse plots',
+    availability: '2 plots available',
+    icon: '🌿',
+    image: '/images/plots/riverside-greenhouse.jpg',
+    description: 'Protected growing space with water access and seed-starting shelves.',
+  },
+  {
+    id: 'sunrise-rooftop',
+    name: 'Sunrise Rooftop Garden',
+    location: 'Central district • 0.8 miles away',
+    size: '16 container plots',
+    availability: '5 plots available',
+    icon: '☀️',
+    image: '/images/plots/sunrise-rooftop.jpg',
+    description: 'A bright rooftop garden with accessible containers and a shared harvest table.',
+  },
+]
